@@ -1,9 +1,7 @@
-// import { PrismaClient } from "@prisma/client";
-
-// const prisma = new PrismaClient();
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import bcrypt from "bcrypt";
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -50,12 +48,24 @@ async function main(): Promise<void> {
   await prisma.product.deleteMany();
   await prisma.user.deleteMany();
 
+  // const users = await Promise.all(
+  //   Array.from({ length: 5 }).map((_, i) =>
+  //     prisma.user.create({
+  //       data: {
+  //         email: `user${i + 1}@example.com`,
+  //         password: "password123",
+  //         role: "USER",
+  //       },
+  //     }),
+  //   ),
+  // );
+
   const users = await Promise.all(
-    Array.from({ length: 5 }).map((_, i) =>
+    Array.from({ length: 5 }).map(async (_, i) =>
       prisma.user.create({
         data: {
           email: `user${i + 1}@example.com`,
-          password: "password123",
+          password: await bcrypt.hash("password123", 10),
           role: "USER",
         },
       }),
@@ -67,11 +77,22 @@ async function main(): Promise<void> {
     "Orthopedic Office Chair",
     "Minimal Study Table",
     "Gaming Chair Pro",
-    "Compact Laptop Desk",
-    "Executive Office Desk",
-    "Wooden Bookshelf",
-    "Adjustable Monitor Stand",
+    "Wireless Bluetooth Headphones",
+    "Smart Fitness Watch",
+    "Stainless Steel Water Bottle",
+    "LED Desk Lamp",
   ];
+
+  const imageMap: Record<string, string> = {
+    "Ergonomic Standing Desk": "/products/desk.jpg",
+    "Orthopedic Office Chair": "/products/chair.jpg",
+    "Minimal Study Table": "/products/table.jpg",
+    "Gaming Chair Pro": "/products/gaming-chair.jpg",
+    "Wireless Bluetooth Headphones": "/products/headphones.jpg",
+    "Smart Fitness Watch": "/products/watch.jpg",
+    "Stainless Steel Water Bottle": "/products/bottle.jpg",
+    "LED Desk Lamp": "/products/lamp.jpg",
+  };
 
   for (const name of productNames) {
     const product = await prisma.product.create({
@@ -80,7 +101,7 @@ async function main(): Promise<void> {
         description: `${name} designed for comfort and durability.`,
         price: randomInt(100, 500),
         stock: randomInt(10, 50),
-        imageUrl: "https://via.placeholder.com/300",
+        imageUrl: imageMap[name],
       },
     });
 
