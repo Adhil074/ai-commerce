@@ -1,6 +1,9 @@
+//components\AddToCartButton.tsx
+
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   productId: string;
@@ -9,6 +12,7 @@ interface Props {
 
 export default function AddToCartButton({ productId, disabled }: Props) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleAdd() {
     try {
@@ -25,13 +29,16 @@ export default function AddToCartButton({ productId, disabled }: Props) {
         }),
       });
 
+      const data: { error?: string } = await res.json();
+
       if (!res.ok) {
-        throw new Error("Failed");
+        alert(data.error ?? "Failed to add to cart");
+        return;
       }
 
-      alert("Added to cart");
+      router.push("/cart");
     } catch {
-      alert("Something went wrong");
+      alert("Network error");
     } finally {
       setLoading(false);
     }
