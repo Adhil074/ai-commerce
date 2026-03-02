@@ -1,40 +1,40 @@
-//app\login\page.tsx
-
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
 
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
     });
 
     setLoading(false);
 
-    if (res?.error) {
-      alert("Invalid credentials");
+    if (!res.ok) {
+      alert("Signup failed");
       return;
     }
 
-    router.push("/");
+    router.push("/login");
   }
 
   return (
     <main className="max-w-md mx-auto py-20">
-      <form onSubmit={handleLogin} className="flex flex-col gap-4">
+      <form onSubmit={handleSignup} className="flex flex-col gap-4">
         <input
           type="email"
           placeholder="Email"
@@ -58,7 +58,7 @@ export default function LoginPage() {
           disabled={loading}
           className="bg-black text-white p-2"
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Creating..." : "Sign Up"}
         </button>
       </form>
     </main>

@@ -1,3 +1,5 @@
+//prisma\seed.ts
+
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
@@ -48,17 +50,13 @@ async function main(): Promise<void> {
   await prisma.product.deleteMany();
   await prisma.user.deleteMany();
 
-  // const users = await Promise.all(
-  //   Array.from({ length: 5 }).map((_, i) =>
-  //     prisma.user.create({
-  //       data: {
-  //         email: `user${i + 1}@example.com`,
-  //         password: "password123",
-  //         role: "USER",
-  //       },
-  //     }),
-  //   ),
-  // );
+  await prisma.user.create({
+    data: {
+      email: "admin@example.com",
+      password: await bcrypt.hash("admin123", 10),
+      role: "ADMIN",
+    },
+  });
 
   const users = await Promise.all(
     Array.from({ length: 5 }).map(async (_, i) =>
