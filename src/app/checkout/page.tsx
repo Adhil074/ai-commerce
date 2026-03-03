@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import PlaceOrderButton from "@/app/checkout/place-order-button";
-
+import DoubtResolver from "@/app/checkout/doubt-resolver";
 
 export const dynamic = "force-dynamic";
 
@@ -33,16 +33,11 @@ export default async function CheckoutPage() {
       <h1 className="text-2xl font-bold mb-6">Order Summary</h1>
 
       {cartItems.map((item) => (
-        <div
-          key={item.id}
-          className="flex justify-between border-b py-4"
-        >
+        <div key={item.id} className="flex justify-between border-b py-4">
           <span>
             {item.product.name} × {item.quantity}
           </span>
-          <span>
-            ${item.product.price * item.quantity}
-          </span>
+          <span>${item.product.price * item.quantity}</span>
         </div>
       ))}
 
@@ -52,6 +47,7 @@ export default async function CheckoutPage() {
       </div>
 
       <PlaceOrderButton />
+      <DoubtResolver productId={cartItems[0].product.id} />
     </main>
   );
 }
