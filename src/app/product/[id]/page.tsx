@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import AddToCartButton from "@/components/AddToCartButton";
+import ProductMatchChecker from "@/components/ProductMatchChecker";
 
 interface PageProps {
   params: Promise<{
@@ -76,7 +77,8 @@ export default async function ProductPage({ params }: PageProps) {
             </p>
 
             <p>
-              🪑 Comfort Mentions: {product.comfortMentionPct?.toFixed(2) ?? "0"}%
+              🪑 Comfort Mentions:{" "}
+              {product.comfortMentionPct?.toFixed(2) ?? "0"}%
             </p>
 
             <p className="font-semibold">
@@ -88,6 +90,7 @@ export default async function ProductPage({ params }: PageProps) {
             productId={product.id}
             disabled={product.stock === 0}
           />
+          <ProductMatchChecker productId={product.id} />
         </div>
       </div>
     </main>
