@@ -34,6 +34,13 @@ model Product {
   cartItems   CartItem[]
   orderItems  OrderItem[]
 
+averageRating     Float   @default(0)
+positivePercent   Float   @default(0)
+sizeComplaintPct  Float   @default(0)
+durabilityPct     Float   @default(0)
+comfortMentionPct Float   @default(0)
+returnRiskPct     Float   @default(0)
+
   @@index([name])
 }
 
