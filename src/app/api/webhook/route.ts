@@ -1,3 +1,5 @@
+//app\api\webhook\route.ts
+
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
@@ -29,23 +31,33 @@ export async function POST(req: Request) {
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
 
-
     const orderId = paymentIntent.metadata.orderId;
+    const userId = paymentIntent.metadata.userId;
 
     if (orderId) {
-      await prisma.order.update({
+      const existingOrder = await prisma.order.findUnique({
         where: { id: orderId },
-        data: { status: "PAID" },
+        select: { status: true },
+      });
+
+      // Prevent duplicate update
+      if (existingOrder && existingOrder.status !== "PAID") {
+        await prisma.order.update({
+          where: { id: orderId },
+          data: { status: "PAID" },
+        });
+      }
+    }
+
+    if (userId) {
+      await prisma.cartItem.deleteMany({
+        where: { userId },
       });
     }
-    // TODO:
-    // Update order status in DB here
   }
 
   if (event.type === "payment_intent.payment_failed") {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
-
-
     const orderId = paymentIntent.metadata.orderId;
 
     if (orderId) {
@@ -54,9 +66,18 @@ export async function POST(req: Request) {
         data: { status: "FAILED" },
       });
     }
+  }
 
-    // TODO:
-    // Update order status in DB here
+  if (event.type === "payment_intent.canceled") {
+    const paymentIntent = event.data.object as Stripe.PaymentIntent;
+    const orderId = paymentIntent.metadata.orderId;
+
+    if (orderId) {
+      await prisma.order.update({
+        where: { id: orderId },
+        data: { status: "CANCELLED" },
+      });
+    }
   }
 
   return NextResponse.json({ received: true });

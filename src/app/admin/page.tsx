@@ -1,5 +1,8 @@
+//app\admin\page.tsx
+
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -19,13 +22,13 @@ export default async function AdminDashboard() {
       <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
 
       <div className="flex flex-col gap-4">
-        <a href="/admin/products" className="underline">
+        <Link href="/admin/products" className="underline">
           Manage Products
-        </a>
+        </Link>
 
-        <a href="/admin/orders" className="underline">
+        <Link href="/admin/orders" className="underline">
           View Orders
-        </a>
+        </Link>
       </div>
     </main>
   );

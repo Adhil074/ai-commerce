@@ -1,3 +1,5 @@
+//app\admin\products\page.tsx
+
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";

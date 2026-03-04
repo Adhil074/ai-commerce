@@ -1,3 +1,5 @@
+//app\admin\orders\order-status-form.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -18,7 +20,7 @@ export default function OrderStatusForm({
     setLoading(true);
 
     await fetch(`/api/admin/orders/${orderId}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },

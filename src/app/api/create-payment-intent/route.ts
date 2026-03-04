@@ -1,3 +1,5 @@
+//app\api\create-payment-intent\route.ts
+
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { auth } from "@/auth";
@@ -28,22 +30,40 @@ export async function POST() {
       return sum + item.product.price * item.quantity;
     }, 0);
 
-    const order = await prisma.order.create({
-      data: {
-        userId: session.user.id,
-        total,
-        status: "PENDING",
-      },
+    const order = await prisma.$transaction(async (tx) => {
+      const createdOrder = await tx.order.create({
+        data: {
+          userId: session.user.id,
+          total,
+          status: "PENDING",
+        },
+      });
+
+      await tx.orderItem.createMany({
+        data: cartItems.map((item) => ({
+          orderId: createdOrder.id,
+          productId: item.productId,
+          quantity: item.quantity,
+          price: item.product.price,
+        })),
+      });
+
+      return createdOrder;
     });
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(total * 100),
-      currency: "usd",
-      metadata: {
-        userId: session.user.id,
-        orderId: order.id,
+    const paymentIntent = await stripe.paymentIntents.create(
+      {
+        amount: Math.round(total * 100),
+        currency: "usd",
+        metadata: {
+          userId: session.user.id,
+          orderId: order.id,
+        },
       },
-    });
+      {
+        idempotencyKey: order.id,
+      },
+    );
 
     return NextResponse.json(
       { clientSecret: paymentIntent.client_secret },

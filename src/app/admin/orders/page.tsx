@@ -43,7 +43,6 @@ export default async function AdminOrdersPage() {
             <p>
               <strong>Total:</strong> ${order.total}
             </p>
-            {/* <p><strong>Status:</strong> {order.status}</p> */}
             <div>
               <strong>Status:</strong>
               <OrderStatusForm

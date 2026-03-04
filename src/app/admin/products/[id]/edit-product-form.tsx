@@ -1,3 +1,5 @@
+//app\admin\products\[id]\edit-product-form.tsx
+
 "use client";
 
 import { useState } from "react";
