@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import EditProductForm from "@/app/admin/products/[id]/edit-product-form";
+import EditProductForm from "@/app/(shop)/admin/products/[id]/edit-product-form";
 
 interface PageProps {
   params: {

@@ -5,6 +5,7 @@ import { ShoppingCart, MoreVertical, Heart } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import SearchBar from "@/components/search-bar";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -28,22 +29,26 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="w-full border-b">
+    <header className="w-full border-b bg-white">
       <div className="max-w-6xl mx-auto flex items-center justify-between py-4 px-4">
         {/* Brand */}
-        <Link href="/products" className="text-lg font-semibold">
+        <Link href="/products" className="text-lg font-semibold text-black">
           AI-Commerce
         </Link>
+        {/* Search */}
+        <div className="flex-1 flex text-black justify-center px-6 max-w-lg">
+          <SearchBar />
+        </div>
 
         {/* Right side */}
-        <div ref={menuRef} className="flex items-center gap-6 relative">
+        <div ref={menuRef} className="flex items-center gap-6 text-gray-700 relative">
           {/* Cart */}
           <Link href="/cart">
             <ShoppingCart className="w-6 h-6" />
           </Link>
 
           <Link href="/wishlist" className="relative">
-            <Heart className="w-6 h-6 text-white hover:text-red-400 transition" />
+            <Heart className="w-6 h-6 text-gray-700 hover:text-red-500 transition" />
           </Link>
 
           {/* Menu */}
