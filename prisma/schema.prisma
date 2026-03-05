@@ -18,6 +18,7 @@ model User {
   cartItems CartItem[]
   orders    Order[]
   reviews   Review[]
+  wishlists   Wishlist[]
   
 }
 
@@ -33,6 +34,7 @@ model Product {
   reviews     Review[]
   cartItems   CartItem[]
   orderItems  OrderItem[]
+  wishlists   Wishlist[]
 
 averageRating     Float   @default(0)
 positivePercent   Float   @default(0)
@@ -98,6 +100,19 @@ model OrderItem {
   product   Product  @relation(fields: [productId], references: [id])
   productId String
   @@index([productId])
+}
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
 }
 
 enum Role {
