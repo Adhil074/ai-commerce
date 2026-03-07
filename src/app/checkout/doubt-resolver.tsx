@@ -67,7 +67,7 @@ export default function DoubtResolver({ productId }: Props) {
       <button
         onClick={handleResolve}
         disabled={loading || !doubt.trim()}
-        className="mt-3 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
+        className="mt-3 bg-[#e9dfd2] text-black px-4 py-2 rounded disabled:opacity-50 hover:bg-[#dfd4c6] transition"
       >
         {loading ? "Checking..." : "Resolve Doubt"}
       </button>

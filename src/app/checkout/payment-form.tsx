@@ -41,8 +41,8 @@ export default function PaymentForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 space-y-4 text-white">
-      <div className="p-4 border text-white rounded-md">
+    <form onSubmit={handleSubmit} className="mt-6 space-y-4 text-black">
+      <div className="p-4 border text-black rounded-md">
         {/* <CardElement /> */}
         <CardElement
           options={{

@@ -48,7 +48,7 @@ export default function AddToCartButton({ productId, disabled }: Props) {
     <button
       onClick={handleAdd}
       disabled={disabled || loading}
-      className="mt-6 bg-black text-white px-6 py-3 rounded-md hover:opacity-90 disabled:opacity-50"
+      className=" bg-[#e9dfd2] text-black px-6 py-3 rounded-md hover:bg-[#dfd4c6] transition disabled:opacity-50"
     >
       {loading ? "Adding..." : "Add to Cart"}
     </button>

@@ -55,8 +55,8 @@ export default function ProductMatchChecker({ productId }: Props) {
   }
 
   return (
-    <div className="mt-10 border-t pt-6">
-      <h2 className="text-xl font-semibold mb-4">
+    <div className="mt-8 border-t border-black pt-6">
+      <h2 className="text-xl font-semibold mb-4 text-black">
         Check if this product matches your needs
       </h2>
 
@@ -65,13 +65,13 @@ export default function ProductMatchChecker({ productId }: Props) {
         onChange={(e) => setInput(e.target.value)}
         placeholder="Describe your needs (max 300 characters)..."
         maxLength={300}
-        className="w-full border p-3 rounded-md"
+        className="w-full border p-3 rounded-md text-black placeholder:text-gray-400"
       />
 
       <button
         onClick={handleCheck}
         disabled={loading}
-        className="mt-4 bg-black text-white px-6 py-2 rounded-md disabled:opacity-50"
+        className="mt-4 bg-[#e9dfd2] text-black px-6 py-2 rounded-md disabled:opacity-50"
       >
         {loading ? "Checking..." : "Check Match"}
       </button>

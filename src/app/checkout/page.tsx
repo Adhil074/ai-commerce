@@ -29,7 +29,7 @@ export default async function CheckoutPage() {
   }, 0);
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10">
+    <main className="max-w-4xl mx-auto px-6 py-10 text-black">
       <h1 className="text-2xl font-bold mb-6">Order Summary</h1>
 
       {cartItems.map((item) => (

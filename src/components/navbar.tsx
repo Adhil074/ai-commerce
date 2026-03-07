@@ -1,3 +1,5 @@
+//components\navbar.tsx
+
 "use client";
 
 import Link from "next/link";
@@ -29,11 +31,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="w-full border-b bg-white">
+    <header className="w-full border-b bg-[#e9dfd2]">
       <div className="max-w-6xl mx-auto flex items-center justify-between py-4 px-4">
         {/* Brand */}
-        <Link href="/products" className="text-lg font-semibold text-black">
-          AI-Commerce
+        <Link href="/products" className="text-lg font-semibold text-black font-serif">
+          ShopIQ
         </Link>
         {/* Search */}
         <div className="flex-1 flex text-black justify-center px-6 max-w-lg">

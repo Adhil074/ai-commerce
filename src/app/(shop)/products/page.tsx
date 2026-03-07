@@ -42,18 +42,20 @@ export default async function ProductsPage({
   });
 
   return (
-    <main className="min-h-screen bg-gray-50 p-8">
-      <h1
-        className="text-3xl font-bold text-black 
-      mb-8"
-      >
-        Products
-      </h1>
-      {search && (
-        <p className="text-gray-500 mb-4">
-          Showing results for &quot;{search}&quot;
-        </p>
-      )}
+    <main className="min-h-screen bg-white p-8">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-black">All Products</h1>
+
+          {search && (
+            <p className="text-gray-500 mt-1">
+              Showing results for &quot;{search}&quot;
+            </p>
+          )}
+        </div>
+
+        <p className="text-sm text-gray-500">{products.length} items</p>
+      </div>
 
       {products.length === 0 ? (
         <p className="text-gray-600">No products available.</p>
@@ -64,18 +66,10 @@ export default async function ProductsPage({
               <Link
                 key={product.id}
                 href={`/product/${product.id}`}
-                className="bg-white rounded-lg shadow hover:shadow-md transition p-4"
+                className="bg-white rounded-xl shadow-sm hover:shadow-md transition p-4 border border-black/5"
               >
-                {/* <div className="relative w-full aspect-square mb-4 overflow-hidden"> */}
-                <div className="relative w-full aspect-square mb-2 overflow-hidden bg-gray-50 flex items-center justify-center">
+                <div className="relative w-full aspect-square mb-3 overflow-hidden bg-gray-100 rounded-lg flex items-center justify-center">
                   {product.imageUrl ? (
-                    // <Image
-                    //   src={product.imageUrl}
-                    //   alt={product.name}
-                    //   fill
-                    //   sizes="(max-width: 768px) 100vw, 25vw"
-                    //   className="object-cover"
-                    // />
                     <Image
                       src={product.imageUrl}
                       alt={product.name}

@@ -28,7 +28,7 @@ export default async function ProductPage({ params }: PageProps) {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-10">
+    <main className="max-w-6xl mx-auto px-6 py-10 bg-white">
       <div className="grid md:grid-cols-2 gap-10">
         {/* Image */}
         <div className="relative w-full h-125 bg-gray-100 rounded-lg overflow-hidden">
@@ -44,11 +44,11 @@ export default async function ProductPage({ params }: PageProps) {
 
         {/* Details */}
         <div className="flex flex-col justify-center">
-          <h1 className="text-3xl font-bold">{product.name}</h1>
+          <h1 className="text-3xl font-bold text-black">{product.name}</h1>
 
           <p className="text-gray-600 mt-4">{product.description}</p>
 
-          <p className="text-2xl font-semibold mt-6">
+          <p className="text-2xl font-semibold mt-6 text-black">
             ${product.price.toFixed(2)}
           </p>
 

@@ -124,7 +124,7 @@ export default function CartPage() {
   if (cart.length === 0) {
     return (
       <main className="max-w-4xl mx-auto px-6 py-10">
-        <h1 className="text-2xl font-bold">Your cart is empty</h1>
+        <h1 className="text-2xl font-bold text-black">Your cart is empty</h1>
       </main>
     );
   }
@@ -136,7 +136,7 @@ export default function CartPage() {
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-10">
-      <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
+      <h1 className="text-2xl font-bold mb-6 text-black">Your Cart</h1>
 
       {cart.map((item) => (
         <div
@@ -144,7 +144,7 @@ export default function CartPage() {
           className="flex justify-between items-center border-b py-4"
         >
           <div>
-            <p className="font-semibold">{item.product.name}</p>
+            <p className="font-semibold text-black">{item.product.name}</p>
             <p className="text-gray-600">
               ${item.product.price} × {item.quantity}
             </p>
@@ -153,7 +153,7 @@ export default function CartPage() {
               <button
                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
                 disabled={item.quantity <= 1 || updatingId === item.id}
-                className="px-3 py-1 border rounded"
+                className="px-3 py-1 border rounded text-black"
               >
                 -
               </button>
@@ -163,7 +163,7 @@ export default function CartPage() {
                 disabled={
                   item.quantity >= item.product.stock || updatingId === item.id
                 }
-                className="px-3 py-1 border rounded"
+                className="px-3 py-1 border rounded text-black"
               >
                 +
               </button>
@@ -178,18 +178,18 @@ export default function CartPage() {
             </div>
           </div>
 
-          <p className="font-semibold">${item.product.price * item.quantity}</p>
+          <p className="font-semibold text-black">${item.product.price * item.quantity}</p>
         </div>
       ))}
 
-      <div className="flex justify-between mt-6 text-xl font-bold">
+      <div className="flex justify-between mt-6 text-xl font-bold text-black">
         <span>Total</span>
         <span>${total}</span>
       </div>
 
       <button
         onClick={() => router.push("/checkout")}
-        className="mt-6 bg-black text-white px-6 py-3 rounded-md hover:opacity-90"
+        className="mt-6 bg-[#e9dfd2] text-black px-6 py-3 rounded-md hover:bg-[#dfd4c6] transition"
       >
         Proceed to Checkout
       </button>

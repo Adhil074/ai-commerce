@@ -1,4 +1,4 @@
-//src\app\page.tsx
+//ai-commerce\src\app\page.tsx
 
 import Link from "next/link";
 import { auth } from "@/auth";
@@ -9,26 +9,36 @@ export const dynamic = "force-dynamic";
 export default async function WelcomePage() {
   const session = await auth();
 
-  // If already logged in → go to products
   if (session?.user?.id) {
     redirect("/products");
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-6">
-      <h1 className="text-3xl font-bold">Welcome to AI Commerce</h1>
+    <main className="min-h-screen bg-[#e9dfd2] flex items-center justify-center px-6">
+      <div className="max-w-2xl text-center flex flex-col items-center gap-6">
+        <h1 className="text-6xl font-bold font-serif text-black tracking-tight">
+          ShopIQ
+        </h1>
 
-      <div className="flex gap-4">
-        <Link
-          href="/signup"
-          className="bg-black text-white px-6 py-3 rounded-md"
-        >
-          Sign Up
-        </Link>
+        <p className="text-m font-style: italic text-gray-800 font-medium">
+          Buy smarter with AI
+        </p>
 
-        <Link href="/login" className="border px-6 py-3 rounded-md">
-          Sign In
-        </Link>
+        <div className="flex gap-6 mt-2">
+          <Link
+            href="/signup"
+            className="bg-black text-white px-7 py-3 rounded-lg font-medium hover:opacity-90 transition"
+          >
+            Get Started
+          </Link>
+
+          <Link
+            href="/login"
+            className="border border-black px-7 py-3 rounded-lg font-medium hover:bg-white transition text-black"
+          >
+            Sign In
+          </Link>
+        </div>
       </div>
     </main>
   );
