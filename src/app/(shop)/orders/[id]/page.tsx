@@ -39,7 +39,7 @@ export default async function OrderDetailsPage({
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10">
+    <main className="max-w-4xl mx-auto px-6 py-10 text-black">
       <h1 className="text-2xl font-bold mb-6">Order Details</h1>
 
       <div className="mb-6 border p-4 rounded">

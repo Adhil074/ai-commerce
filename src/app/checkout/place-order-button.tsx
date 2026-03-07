@@ -45,7 +45,7 @@ export default function PlaceOrderButton() {
     <button
       onClick={handleStartPayment}
       disabled={loading}
-      className="mt-6 bg-black text-white px-6 py-3 rounded-md hover:opacity-90 disabled:opacity-50"
+      className="mt-6 bg-[#e9dfd2] text-black px-6 py-3 rounded-md hover:bg-[#dfd4c6] transition disabled:opacity-50"
     >
       {loading ? "Preparing..." : "Pay Now"}
     </button>

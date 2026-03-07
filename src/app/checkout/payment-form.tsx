@@ -48,7 +48,7 @@ export default function PaymentForm({
           options={{
             style: {
               base: {
-                color: "#ffffff",
+                color: "#000000",
                 fontSize: "16px",
                 "::placeholder": {
                   color: "#aaaaaa",
@@ -65,7 +65,7 @@ export default function PaymentForm({
       <button
         type="submit"
         disabled={loading}
-        className="bg-black text-white px-6 py-3 rounded-md hover:opacity-90 disabled:opacity-50"
+        className="bg-[#e9dfd2] text-black px-6 py-3 rounded-md hover:bg-[#dfd4c6] transition disabled:opacity-50"
       >
         {loading ? "Processing..." : "Pay Now"}
       </button>

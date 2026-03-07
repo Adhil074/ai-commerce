@@ -26,8 +26,8 @@ export default async function AdminOrdersPage() {
   });
 
   return (
-    <main className="max-w-5xl mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-8">Orders</h1>
+    <main className="max-w-5xl mx-auto py-10 text-black">
+      <h1 className="text-3xl font-bold mb-8 ">Orders</h1>
 
       {orders.length === 0 && <p>No orders yet.</p>}
 

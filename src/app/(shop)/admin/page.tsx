@@ -18,17 +18,19 @@ export default async function AdminDashboard() {
   }
 
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
+    <main className="min-h-screen flex items-center justify-center bg-white">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-6 text-black">Admin Dashboard</h1>
 
-      <div className="flex flex-col gap-4">
-        <Link href="/admin/products" className="underline">
-          Manage Products
-        </Link>
+        <div className="flex flex-col gap-4">
+          <Link href="/admin/products" className="underline text-blue-400">
+            Manage Products
+          </Link>
 
-        <Link href="/admin/orders" className="underline">
-          View Orders
-        </Link>
+          <Link href="/admin/orders" className="underline text-blue-400">
+            View Orders
+          </Link>
+        </div>
       </div>
     </main>
   );
