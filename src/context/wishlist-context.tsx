@@ -9,17 +9,19 @@ interface WishlistContextType {
 
 const WishlistContext = createContext<WishlistContextType | null>(null);
 
-export function WishlistProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function WishlistProvider({ children }: { children: React.ReactNode }) {
   const [wishlist, setWishlist] = useState<string[]>([]);
 
   useEffect(() => {
     async function loadWishlist() {
       const res = await fetch("/api/wishlist");
+
       const data = await res.json();
+
+      if (!Array.isArray(data)) {
+        setWishlist([]);
+        return;
+      }
 
       const ids = data.map((item: { productId: string }) => item.productId);
 

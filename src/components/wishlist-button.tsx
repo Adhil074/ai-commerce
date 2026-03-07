@@ -48,11 +48,13 @@ export default function WishlistButton({ productId }: Props) {
       type="button"
       onClick={handleToggle}
       disabled={loading}
-      className="absolute top-2 right-2 p-1 z-10"
+      className="p-2 flex items-center justify-center hover:scale-110 transition-transform duration-150"
     >
       <Heart
-        className={`w-5 h-5 ${
-          wishlisted ? "fill-red-500 text-red-500" : "text-gray-500"
+        className={`w-6 h-6 transition-colors duration-150 ${
+          wishlisted
+            ? "fill-red-500 text-red-500"
+            : "text-gray-400 hover:text-red-500"
         }`}
       />
     </button>

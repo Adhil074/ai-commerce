@@ -1,11 +1,10 @@
-// app\products\page.tsx
+//app\(shop)\products\page.tsx
 
 import Link from "next/link";
 import Image from "next/image";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import WishlistButton from "@/components/wishlist-button";
 import { WishlistProvider } from "@/context/wishlist-context";
 
 export const dynamic = "force-dynamic";
@@ -65,11 +64,18 @@ export default async function ProductsPage({
               <Link
                 key={product.id}
                 href={`/product/${product.id}`}
-                className="relative bg-white rounded-lg shadow hover:shadow-md transition p-4"
+                className="bg-white rounded-lg shadow hover:shadow-md transition p-4"
               >
-                <WishlistButton productId={product.id} />
-                <div className="relative w-full aspect-square mb-4">
+                {/* <div className="relative w-full aspect-square mb-4 overflow-hidden"> */}
+                <div className="relative w-full aspect-square mb-2 overflow-hidden bg-gray-50 flex items-center justify-center">
                   {product.imageUrl ? (
+                    // <Image
+                    //   src={product.imageUrl}
+                    //   alt={product.name}
+                    //   fill
+                    //   sizes="(max-width: 768px) 100vw, 25vw"
+                    //   className="object-cover"
+                    // />
                     <Image
                       src={product.imageUrl}
                       alt={product.name}
