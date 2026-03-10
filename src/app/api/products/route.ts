@@ -88,7 +88,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Temporary admin simulation (real auth comes later)
     const isAdmin = true;
 
     if (!isAdmin) {
@@ -101,7 +100,7 @@ export async function POST(req: Request) {
         description,
         price,
         stock,
-        imageUrl: imageUrl ?? null,
+        imageUrl: imageUrl ?? "",
       },
       select: {
         id: true,

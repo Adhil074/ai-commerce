@@ -1,5 +1,3 @@
-//app\admin\orders\order-status-form.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -9,10 +7,7 @@ interface Props {
   currentStatus: string;
 }
 
-export default function OrderStatusForm({
-  orderId,
-  currentStatus,
-}: Props) {
+export default function OrderStatusForm({ orderId, currentStatus }: Props) {
   const [status, setStatus] = useState(currentStatus);
   const [loading, setLoading] = useState(false);
 

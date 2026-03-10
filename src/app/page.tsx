@@ -1,5 +1,3 @@
-//ai-commerce\src\app\page.tsx
-
 import Link from "next/link";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";

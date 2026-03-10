@@ -1,5 +1,3 @@
-//app\api\ai\doubt\route.ts
-
 export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
@@ -26,28 +24,26 @@ export async function POST(req: Request) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
 
-    const ip =
-  req.headers.get("x-forwarded-for") ??
-  "unknown-ip";
+    const ip = req.headers.get("x-forwarded-for") ?? "unknown-ip";
 
-const now = Date.now();
-const existing = rateLimitMap.get(ip);
+    const now = Date.now();
+    const existing = rateLimitMap.get(ip);
 
-if (existing && existing.expiresAt > now) {
-  if (existing.count >= MAX_REQUESTS) {
-    return NextResponse.json(
-      { error: "Too many requests. Please wait a minute." },
-      { status: 429 },
-    );
-  }
+    if (existing && existing.expiresAt > now) {
+      if (existing.count >= MAX_REQUESTS) {
+        return NextResponse.json(
+          { error: "Too many requests. Please wait a minute." },
+          { status: 429 },
+        );
+      }
 
-  existing.count += 1;
-} else {
-  rateLimitMap.set(ip, {
-    count: 1,
-    expiresAt: now + WINDOW_MS,
-  });
-}
+      existing.count += 1;
+    } else {
+      rateLimitMap.set(ip, {
+        count: 1,
+        expiresAt: now + WINDOW_MS,
+      });
+    }
 
     if (!apiKey) {
       return NextResponse.json(
@@ -139,14 +135,12 @@ Be honest.
       model: "gemini-2.5-flash",
     });
 
-   
-
     const aiPromise = model.generateContent(structuredPrompt);
 
     const timeoutPromise = new Promise<never>((_, reject) => {
       setTimeout(() => {
         reject(new Error("AI timeout"));
-      }, 15000); 
+      }, 15000);
     });
 
     const result = await Promise.race([aiPromise, timeoutPromise]);
@@ -162,7 +156,10 @@ Be honest.
     console.error("Doubt resolver error:", error);
 
     return NextResponse.json(
-      { error: "AI service is temporarily unavailable. Please try again in a moment." },
+      {
+        error:
+          "AI service is temporarily unavailable. Please try again in a moment.",
+      },
       { status: 500 },
     );
   }

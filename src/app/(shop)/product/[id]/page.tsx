@@ -1,5 +1,3 @@
-//app/(shop)/product/[id]/page.tsx
-
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import AddToCartButton from "@/components/AddToCartButton";
@@ -48,10 +46,6 @@ export default async function ProductPage({ params }: PageProps) {
           <h1 className="text-3xl font-bold text-black">{product.name}</h1>
 
           <p className="text-gray-600 mt-4">{product.description}</p>
-
-          {/* <p className="text-2xl font-semibold mt-6 text-black">
-            ${product.price.toFixed(2)}
-          </p> */}
 
           <p className="text-2xl font-semibold mt-6 text-black">
             {new Intl.NumberFormat("en-IN", {

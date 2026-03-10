@@ -33,7 +33,6 @@ export default async function OrderDetailsPage({
     notFound();
   }
 
-  // 🔐 Secure access check
   if (order.userId !== session.user.id) {
     redirect("/orders");
   }

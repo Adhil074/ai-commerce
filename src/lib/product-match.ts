@@ -1,5 +1,3 @@
-//src\lib\product-match.ts
-
 type ProductIntelligence = {
   averageRating: number;
   positivePercent: number;

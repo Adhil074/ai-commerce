@@ -1,5 +1,3 @@
-// src/app/(shop)/layout.tsx
-
 import Navbar from "@/components/navbar";
 
 export default function ShopLayout({

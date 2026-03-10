@@ -21,15 +21,7 @@ export default async function OrdersPage() {
     },
   });
 
-  // return (
-  //   <main className="max-w-4xl mx-auto px-6 py-10 text-black">
-  //     <h1 className="text-2xl font-bold mb-6">My Orders</h1>
-
-  //     {orders.length === 0 && (
-  //       <p className="text-gray-500">You have no orders yet.</p>
-  //     )}
-
-  //     {orders.map((order) => (
+ 
   return (
   <main className="min-h-screen bg-white px-6 py-10 text-black">
     {orders.length === 0 ? (

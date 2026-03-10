@@ -1,5 +1,3 @@
-//src\auth.ts
-
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
@@ -10,37 +8,37 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
   providers: [
-   Credentials({
-  name: "Credentials",
-  credentials: {
-    email: { label: "Email", type: "text" },
-    password: { label: "Password", type: "password" },
-  },
-  async authorize(credentials) {
-    if (!credentials) return null;
+    Credentials({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials) return null;
 
-    const email = credentials.email as string;
-    const password = credentials.password as string;
+        const email = credentials.email as string;
+        const password = credentials.password as string;
 
-    if (!email || !password) return null;
+        if (!email || !password) return null;
 
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+        const user = await prisma.user.findUnique({
+          where: { email },
+        });
 
-    if (!user) return null;
+        if (!user) return null;
 
-    const isValid = await bcrypt.compare(password, user.password);
+        const isValid = await bcrypt.compare(password, user.password);
 
-    if (!isValid) return null;
+        if (!isValid) return null;
 
-    return {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-    };
-  },
-}),
+        return {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+        };
+      },
+    }),
   ],
   callbacks: {
     async jwt({ token, user }) {

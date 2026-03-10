@@ -1,5 +1,3 @@
-//app\(shop)\products\page.tsx
-
 import Link from "next/link";
 import Image from "next/image";
 import { auth } from "@/auth";

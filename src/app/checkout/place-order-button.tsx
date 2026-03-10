@@ -1,5 +1,3 @@
-// //app\checkout\place-order-button.tsx
-
 "use client";
 
 import { useState } from "react";

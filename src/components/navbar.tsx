@@ -1,5 +1,3 @@
-//components\navbar.tsx
-
 "use client";
 
 import Link from "next/link";
@@ -34,7 +32,10 @@ export default function Navbar() {
     <header className="w-full border-b bg-[#e9dfd2]">
       <div className="max-w-6xl mx-auto flex items-center justify-between py-4 px-4">
         {/* Brand */}
-        <Link href="/products" className="text-lg font-semibold text-black font-serif">
+        <Link
+          href="/products"
+          className="text-lg font-semibold text-black font-serif"
+        >
           ShopIQ
         </Link>
         {/* Search */}
@@ -43,7 +44,10 @@ export default function Navbar() {
         </div>
 
         {/* Right side */}
-        <div ref={menuRef} className="flex items-center gap-6 text-gray-700 relative">
+        <div
+          ref={menuRef}
+          className="flex items-center gap-6 text-gray-700 relative"
+        >
           {/* Cart */}
           <Link href="/cart">
             <ShoppingCart className="w-6 h-6" />
