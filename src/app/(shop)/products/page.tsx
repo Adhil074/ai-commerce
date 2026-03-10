@@ -37,7 +37,7 @@ export default async function ProductsPage({
       imageUrl: true,
     },
     orderBy: {
-      createdAt: "desc",
+      sortOrder: "asc",
     },
   });
 
@@ -89,7 +89,10 @@ export default async function ProductsPage({
                 </h2>
 
                 <p className="text-gray-600 mt-2">
-                  ${product.price.toFixed(2)}
+                  {new Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                  }).format(product.price)}
                 </p>
               </Link>
             ))}

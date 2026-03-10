@@ -67,6 +67,13 @@ async function main(): Promise<void> {
     "Smart Fitness Watch",
     "Stainless Steel Water Bottle",
     "LED Desk Lamp",
+    "Mechanical Keyboard",
+    "Wireless Mouse",
+    "Wireless Earbuds",
+    "Adjustable Dumbbells",
+    "Cricket Bat",
+    "Portable Laptop Stand",
+    "Olympic Barbells",
   ];
 
   const imageMap: Record<string, string> = {
@@ -78,6 +85,31 @@ async function main(): Promise<void> {
     "Smart Fitness Watch": "/products/watch.jpg",
     "Stainless Steel Water Bottle": "/products/bottle.jpg",
     "LED Desk Lamp": "/products/lamp.jpg",
+    "Mechanical Keyboard": "/products/keyboard.jpg",
+    "Wireless Mouse": "/products/mouse.jpg",
+    "Wireless Earbuds": "/products/earbuds.jpg",
+    "Adjustable Dumbbells": "/products/dumbbells.jpg",
+    "Cricket Bat": "/products/cricket-bat.jpg",
+    "Portable Laptop Stand": "/products/laptop-stand.jpg",
+    "Olympic Barbells": "/products/barbells.jpg",
+  };
+
+  const priceMap: Record<string, number> = {
+    "LED Desk Lamp": 799,
+    "Stainless Steel Water Bottle": 299,
+    "Smart Fitness Watch": 1499,
+    "Wireless Bluetooth Headphones": 1999,
+    "Gaming Chair Pro": 8999,
+    "Minimal Study Table": 3999,
+    "Orthopedic Office Chair": 6999,
+    "Ergonomic Standing Desk": 4999,
+    "Mechanical Keyboard": 2499,
+    "Wireless Mouse": 799,
+    "Wireless Earbuds": 1999,
+    "Adjustable Dumbbells": 1499,
+    "Cricket Bat": 1999,
+    "Portable Laptop Stand": 499,
+    "Olympic Barbells": 2999,
   };
 
   type ProductProfile = {
@@ -124,9 +156,10 @@ async function main(): Promise<void> {
       data: {
         name,
         description: `${name} designed for comfort and durability.`,
-        price: randomInt(100, 500),
+        price: priceMap[name],
         stock: randomInt(10, 50),
         imageUrl: imageMap[name],
+        sortOrder: productNames.indexOf(name) + 1,
       },
     });
 

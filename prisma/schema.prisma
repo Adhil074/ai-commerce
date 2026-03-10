@@ -29,6 +29,7 @@ model Product {
   price       Float
   stock       Int
   imageUrl    String
+  sortOrder   Int     @default(0)
   createdAt   DateTime @default(now())
 
   reviews     Review[]
@@ -43,6 +44,7 @@ sizeComplaintPct  Float   @default(0)
 durabilityPct     Float   @default(0)
 comfortMentionPct Float   @default(0)
 returnRiskPct     Float   @default(0)
+
 
   @@index([name])
 }

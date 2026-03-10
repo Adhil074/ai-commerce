@@ -1,4 +1,3 @@
-
 //app/(shop)/product/[id]/page.tsx
 
 import { notFound } from "next/navigation";
@@ -50,8 +49,15 @@ export default async function ProductPage({ params }: PageProps) {
 
           <p className="text-gray-600 mt-4">{product.description}</p>
 
-          <p className="text-2xl font-semibold mt-6 text-black">
+          {/* <p className="text-2xl font-semibold mt-6 text-black">
             ${product.price.toFixed(2)}
+          </p> */}
+
+          <p className="text-2xl font-semibold mt-6 text-black">
+            {new Intl.NumberFormat("en-IN", {
+              style: "currency",
+              currency: "INR",
+            }).format(product.price)}
           </p>
 
           <p className="mt-2">
