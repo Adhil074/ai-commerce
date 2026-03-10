@@ -130,6 +130,14 @@ async function main(): Promise<void> {
       },
     });
 
+    await prisma.productImage.createMany({
+      data: [
+        { url: imageMap[name], productId: product.id },
+        { url: imageMap[name].replace(".jpg", "1.jpg"), productId: product.id },
+        { url: imageMap[name].replace(".jpg", "2.jpg"), productId: product.id },
+      ],
+    });
+
     const reviewsData = [];
 
     for (let i = 0; i < 50; i++) {

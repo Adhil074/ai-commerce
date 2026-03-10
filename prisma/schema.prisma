@@ -35,6 +35,7 @@ model Product {
   cartItems   CartItem[]
   orderItems  OrderItem[]
   wishlists   Wishlist[]
+  images      ProductImage[]
 
 averageRating     Float   @default(0)
 positivePercent   Float   @default(0)
@@ -113,6 +114,15 @@ model Wishlist {
   createdAt DateTime @default(now())
 
   @@unique([userId, productId])
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  url       String
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
 }
 
 enum Role {

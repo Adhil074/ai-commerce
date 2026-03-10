@@ -1,13 +1,13 @@
-//app\(shop)\product\[id]\page.tsx
 
-import Image from "next/image";
+//app/(shop)/product/[id]/page.tsx
+
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import AddToCartButton from "@/components/AddToCartButton";
 import ProductMatchChecker from "@/components/ProductMatchChecker";
 import WishlistButton from "@/components/wishlist-button";
 import { WishlistProvider } from "@/context/wishlist-context";
-
+import ProductGallery from "@/components/ProductGallary";
 interface PageProps {
   params: Promise<{
     id: string;
@@ -21,28 +21,30 @@ export default async function ProductPage({ params }: PageProps) {
 
   const product = await prisma.product.findUnique({
     where: { id },
+    include: {
+      images: true,
+    },
   });
 
   if (!product) {
     notFound();
   }
 
+  console.log(product.images);
+
   return (
     <main className="max-w-6xl mx-auto px-6 py-10 bg-white">
       <div className="grid md:grid-cols-2 gap-10">
-        {/* Image */}
-        <div className="relative w-full h-125 bg-gray-100 rounded-lg overflow-hidden">
-          <Image
-            src={product.imageUrl ?? "/products/fallback.jpg"}
-            alt={product.name}
-            fill
-            className="object-contain"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
+        {/* LEFT COLUMN (image + thumbnails) */}
+        <div>
+          <ProductGallery
+            images={product.images}
+            fallback={product.imageUrl ?? "/products/fallback.jpg"}
+            name={product.name}
           />
         </div>
 
-        {/* Details */}
+        {/* RIGHT COLUMN (details) */}
         <div className="flex flex-col justify-center">
           <h1 className="text-3xl font-bold text-black">{product.name}</h1>
 
@@ -60,7 +62,7 @@ export default async function ProductPage({ params }: PageProps) {
             )}
           </p>
 
-          {/* Review Intelligence Section */}
+          {/* Review Intelligence */}
           <div className="mt-6 space-y-1 text-sm text-gray-700 border-t pt-4">
             <p>
               ⭐ Average Rating: {product.averageRating?.toFixed(2) ?? "0.00"}

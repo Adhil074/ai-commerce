@@ -42,9 +42,6 @@ export default function CartPage() {
     }
   }
 
-  //   useEffect(() => {
-  //     fetchCart();
-  //   }, []);
   useEffect(() => {
     async function fetchCart() {
       try {
@@ -178,7 +175,9 @@ export default function CartPage() {
             </div>
           </div>
 
-          <p className="font-semibold text-black">${item.product.price * item.quantity}</p>
+          <p className="font-semibold text-black">
+            ${item.product.price * item.quantity}
+          </p>
         </div>
       ))}
 
