@@ -30,7 +30,8 @@ export async function PATCH(request: Request, context: RouteContext) {
     const body = await request.json();
     const { status } = body as { status?: OrderStatus };
 
-    if (!status || !Object.values(OrderStatus).includes(status)) {
+    // if (!status || !Object.values(OrderStatus).includes(status)) {
+    if (!status || !Object.keys(allowedTransitions).includes(status)) {
       return NextResponse.json(
         { error: "Invalid status value" },
         { status: 400 },
