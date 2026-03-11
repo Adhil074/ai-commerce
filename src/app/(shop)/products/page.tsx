@@ -4,19 +4,25 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { WishlistProvider } from "@/context/wishlist-context";
-
 export const dynamic = "force-dynamic";
-
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+};
 export default async function ProductsPage({
   searchParams,
 }: {
-searchParams?: Promise<{ search?: string }>}) {
+  searchParams?: Promise<{ search?: string }>;
+}) {
   const session = await auth();
 
   if (!session?.user?.id) {
     redirect("/");
   }
-const search = (await searchParams)?.search ?? "";  const products = await prisma.product.findMany({
+  const search = (await searchParams)?.search ?? "";
+  const products = await prisma.product.findMany({
     where: search
       ? {
           name: {
@@ -57,7 +63,7 @@ const search = (await searchParams)?.search ?? "";  const products = await prism
       ) : (
         <WishlistProvider>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
+            {products.map((product: Product) => (
               <Link
                 key={product.id}
                 href={`/product/${product.id}`}
