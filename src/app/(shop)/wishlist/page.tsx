@@ -5,6 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
+type WishlistItem = {
+  id: string;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    imageUrl: string | null;
+  };
+};
 
 export default async function WishlistPage() {
   const session = await auth();
@@ -35,7 +44,7 @@ export default async function WishlistPage() {
         <>
           <h1 className="text-3xl font-bold text-black mb-8">Your Wishlist</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {wishlist.map((item) => (
+            {wishlist.map((item: WishlistItem) => (
               <Link
                 key={item.id}
                 href={`/product/${item.product.id}`}
