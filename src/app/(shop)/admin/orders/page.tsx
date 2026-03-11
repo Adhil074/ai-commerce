@@ -24,6 +24,8 @@ export default async function AdminOrdersPage() {
     },
   });
 
+  type Order = typeof orders[number];
+
   return (
     <main className="max-w-5xl mx-auto py-10 text-black">
       <h1 className="text-3xl font-bold mb-8 ">Orders</h1>
@@ -31,7 +33,7 @@ export default async function AdminOrdersPage() {
       {orders.length === 0 && <p>No orders yet.</p>}
 
       <div className="space-y-6">
-        {orders.map((order) => (
+        {orders.map((order: Order) => (
           <div key={order.id} className="border p-4 rounded">
             <p>
               <strong>Order ID:</strong> {order.id}
