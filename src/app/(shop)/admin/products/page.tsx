@@ -3,8 +3,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
-type Product = Awaited<ReturnType<typeof prisma.product.findFirst>>;
-
+type Product = Awaited<ReturnType<typeof prisma.product.findMany>>[number];
 export default async function AdminProductsPage() {
   const session = await auth();
 
@@ -32,7 +31,7 @@ export default async function AdminProductsPage() {
       </Link>
 
       <div className="mt-6 space-y-4 text-black">
-        {products.map((product: NonNullable<Product>) => (
+        {products.map((product: Product) => (
           <div key={product.id} className="border p-4 flex justify-between">
             <span>{product.name}</span>
 

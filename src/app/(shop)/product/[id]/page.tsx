@@ -6,15 +6,15 @@ import WishlistButton from "@/components/wishlist-button";
 import { WishlistProvider } from "@/context/wishlist-context";
 import ProductGallery from "@/components/ProductGallary";
 interface PageProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export const dynamic = "force-dynamic";
 
 export default async function ProductPage({ params }: PageProps) {
-  const { id } = await params;
+  const { id } = params;
 
   const product = await prisma.product.findUnique({
     where: { id },
@@ -26,8 +26,6 @@ export default async function ProductPage({ params }: PageProps) {
   if (!product) {
     notFound();
   }
-
-  console.log(product.images);
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-10 bg-white">

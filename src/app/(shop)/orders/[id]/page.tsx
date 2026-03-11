@@ -8,6 +8,15 @@ interface OrderDetailsPageProps {
   }>;
 }
 
+interface OrderItem {
+  id: string;
+  quantity: number;
+  price: number;
+  product: {
+    name: string;
+  };
+}
+
 export default async function OrderDetailsPage({
   params,
 }: OrderDetailsPageProps) {
@@ -55,7 +64,7 @@ export default async function OrderDetailsPage({
 
       <h2 className="text-xl font-semibold mb-4">Items</h2>
 
-      {order.items.map((item) => (
+      {order.items.map((item: OrderItem) => (
         <div key={item.id} className="flex justify-between border-b py-4">
           <div>
             <p>{item.product.name}</p>

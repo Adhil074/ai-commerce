@@ -27,11 +27,11 @@ export async function POST() {
     const total = cartItems.reduce((sum, item) => {
       return sum + item.product.price * item.quantity;
     }, 0);
-
+    const userId = session.user.id as string;
     const order = await prisma.$transaction(async (tx) => {
       const createdOrder = await tx.order.create({
         data: {
-          userId: session.user.id,
+          userId,
           total,
           status: "PENDING",
         },
@@ -54,7 +54,7 @@ export async function POST() {
         amount: Math.round(total * 100),
         currency: "usd",
         metadata: {
-          userId: session.user.id,
+          userId,
           orderId: order.id,
         },
       },

@@ -10,16 +10,13 @@ export const dynamic = "force-dynamic";
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ search?: string }>;
-}) {
+searchParams?: Promise<{ search?: string }>}) {
   const session = await auth();
 
   if (!session?.user?.id) {
     redirect("/");
   }
-  const params = await searchParams;
-  const search = params?.search ?? "";
-  const products = await prisma.product.findMany({
+const search = (await searchParams)?.search ?? "";  const products = await prisma.product.findMany({
     where: search
       ? {
           name: {

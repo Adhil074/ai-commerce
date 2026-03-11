@@ -14,7 +14,7 @@ export default function AddProductPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const res = await fetch("/api/admin/products", {
