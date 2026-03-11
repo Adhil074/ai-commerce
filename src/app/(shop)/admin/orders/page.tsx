@@ -24,7 +24,8 @@ export default async function AdminOrdersPage() {
     },
   });
 
-  type Order = typeof orders[number];
+  type Order = (typeof orders)[number];
+  type OrderItem = Order["items"][number];
 
   return (
     <main className="max-w-5xl mx-auto py-10 text-black">
@@ -58,7 +59,7 @@ export default async function AdminOrdersPage() {
             <div className="mt-4">
               <strong>Items:</strong>
               <ul className="list-disc ml-6">
-                {order.items.map((item) => (
+                {order.items.map((item: OrderItem) => (
                   <li key={item.id}>
                     {item.product.name} × {item.quantity}
                   </li>
