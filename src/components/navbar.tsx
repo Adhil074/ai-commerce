@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import SearchBar from "@/components/search-bar";
+import { Suspense } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -40,7 +41,13 @@ export default function Navbar() {
         </Link>
         {/* Search */}
         <div className="flex-1 flex text-black justify-center px-6 max-w-lg">
-          <SearchBar />
+          <Suspense
+            fallback={
+              <div className="w-full max-w-md h-10 rounded-full bg-gray-200 animate-pulse" />
+            }
+          >
+            <SearchBar />
+          </Suspense>
         </div>
 
         {/* Right side */}

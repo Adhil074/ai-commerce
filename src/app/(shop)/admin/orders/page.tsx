@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import OrderStatusForm from "@/app/(shop)/admin/orders/order-status-form";
-
+export const dynamic = "force-dynamic";
 export default async function AdminOrdersPage() {
   const session = await auth();
 

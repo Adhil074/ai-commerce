@@ -20,28 +20,6 @@ export default function SearchBar() {
   const [query, setQuery] = useState(currentSearch);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
 
-  /*
-  ---------------------------------------
-  URL SEARCH UPDATE (SERVER FILTER)
-  ---------------------------------------
-  */
-
-  //   useEffect(() => {
-  //     const timer = setTimeout(() => {
-  //       const params = new URLSearchParams(searchParamsString);
-
-  //       if (query) {
-  //         params.set("search", query);
-  //       } else {
-  //         params.delete("search");
-  //       }
-
-  //       router.replace(`/products?${params.toString()}`);
-  //     }, 500);
-
-  //     return () => clearTimeout(timer);
-  //   }, [query, router, searchParamsString]);
-
   useEffect(() => {
     if (pathname !== "/products") return;
 

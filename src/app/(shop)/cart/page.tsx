@@ -1,8 +1,8 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
 interface Product {
   id: string;
   name: string;
@@ -16,6 +16,7 @@ interface CartItem {
   quantity: number;
   product: Product;
 }
+
 
 export default function CartPage() {
   const router = useRouter();
