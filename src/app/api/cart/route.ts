@@ -116,10 +116,7 @@ export async function PATCH(req: Request) {
     const session = await auth();
 
     if (!session?.user?.id) {
-      return Response.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const body = await req.json();
@@ -129,10 +126,7 @@ export async function PATCH(req: Request) {
     };
 
     if (!cartItemId || !quantity || quantity <= 0) {
-      return Response.json(
-        { error: "Invalid input" },
-        { status: 400 }
-      );
+      return Response.json({ error: "Invalid input" }, { status: 400 });
     }
 
     const cartItem = await prisma.cartItem.findUnique({
@@ -141,17 +135,11 @@ export async function PATCH(req: Request) {
     });
 
     if (!cartItem || cartItem.userId !== session.user.id) {
-      return Response.json(
-        { error: "Not found" },
-        { status: 404 }
-      );
+      return Response.json({ error: "Not found" }, { status: 404 });
     }
 
     if (quantity > cartItem.product.stock) {
-      return Response.json(
-        { error: "Exceeds stock" },
-        { status: 400 }
-      );
+      return Response.json({ error: "Exceeds stock" }, { status: 400 });
     }
 
     await prisma.cartItem.update({
@@ -159,17 +147,11 @@ export async function PATCH(req: Request) {
       data: { quantity },
     });
 
-    return Response.json(
-      { message: "Cart updated" },
-      { status: 200 }
-    );
+    return Response.json({ message: "Cart updated" }, { status: 200 });
   } catch (error) {
     console.error("PATCH /api/cart error:", error);
 
-    return Response.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -178,10 +160,7 @@ export async function DELETE(req: Request) {
     const session = await auth();
 
     if (!session?.user?.id) {
-      return Response.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const body = await req.json();
@@ -190,10 +169,7 @@ export async function DELETE(req: Request) {
     };
 
     if (!cartItemId) {
-      return Response.json(
-        { error: "Invalid input" },
-        { status: 400 }
-      );
+      return Response.json({ error: "Invalid input" }, { status: 400 });
     }
 
     const cartItem = await prisma.cartItem.findUnique({
@@ -201,26 +177,17 @@ export async function DELETE(req: Request) {
     });
 
     if (!cartItem || cartItem.userId !== session.user.id) {
-      return Response.json(
-        { error: "Not found" },
-        { status: 404 }
-      );
+      return Response.json({ error: "Not found" }, { status: 404 });
     }
 
     await prisma.cartItem.delete({
       where: { id: cartItemId },
     });
 
-    return Response.json(
-      { message: "Item removed" },
-      { status: 200 }
-    );
+    return Response.json({ message: "Item removed" }, { status: 200 });
   } catch (error) {
     console.error("DELETE /api/cart error:", error);
 
-    return Response.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }

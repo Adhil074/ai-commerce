@@ -1,3 +1,5 @@
+//app\(shop)\product\[id]\page.tsx
+
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import AddToCartButton from "@/components/AddToCartButton";
