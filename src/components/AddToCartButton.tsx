@@ -1,3 +1,4 @@
+//components\AddToCartButton.tsx
 "use client";
 
 import { useState } from "react";
@@ -18,6 +19,7 @@ export default function AddToCartButton({ productId, disabled }: Props) {
 
       const res = await fetch("/api/cart", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -41,7 +43,6 @@ export default function AddToCartButton({ productId, disabled }: Props) {
       setLoading(false);
     }
   }
-
   return (
     <button
       onClick={handleAdd}
