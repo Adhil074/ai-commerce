@@ -5,11 +5,10 @@ import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import EditProductForm from "@/app/(shop)/admin/products/[id]/edit-product-form";
 
-
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function EditProductPage({ params }: PageProps) {
@@ -18,7 +17,7 @@ export default async function EditProductPage({ params }: PageProps) {
   if (!session?.user?.id || session.user.role !== "ADMIN") {
     redirect("/");
   }
-const {id} = await params;
+  const { id } = await params;
 
   const product = await prisma.product.findUnique({
     where: { id },
