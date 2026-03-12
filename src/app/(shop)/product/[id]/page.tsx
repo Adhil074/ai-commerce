@@ -6,15 +6,15 @@ import WishlistButton from "@/components/wishlist-button";
 import { WishlistProvider } from "@/context/wishlist-context";
 import ProductGallery from "@/components/ProductGallary";
 interface PageProps {
-  params: {
+  params:Promise< {
     id: string;
-  };
+  }>;
 }
 
 export const dynamic = "force-dynamic";
 
 export default async function ProductPage({ params }: PageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   const product = await prisma.product.findUnique({
     where: { id },
