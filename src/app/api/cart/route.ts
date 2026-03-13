@@ -48,7 +48,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const session = await auth();
-
+    console.log("SESSION DEBUG:", session);
     if (!session?.user?.id) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
