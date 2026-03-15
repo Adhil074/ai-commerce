@@ -10,22 +10,12 @@ export async function proxy(req: NextRequest) {
 
   const { pathname } = req.nextUrl;
 
-  // Protect cart routes (must be logged in)
-  if (pathname.startsWith("/api/cart")) {
-    if (!token) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
-    }
-  }
-
   // Protect product creation (admin only)
   if (pathname === "/api/products" && req.method === "POST") {
     if (!token || token.role !== "ADMIN") {
       return NextResponse.json(
         { error: "Admin access required" },
-        { status: 403 }
+        { status: 403 },
       );
     }
   }
@@ -34,5 +24,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/cart/:path*", "/api/products"],
+  matcher: ["/api/products"],
 };
