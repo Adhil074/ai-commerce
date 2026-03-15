@@ -32,7 +32,7 @@ export default async function WelcomePage() {
 
           <Link
             href="/login"
-            className="border border-black px-7 py-3 rounded-lg font-medium hover:bg-white transition text-black"
+            className="border border-black px-7 py-3 rounded-lg font-medium hover:bg-[#dfd4c6]  transition text-black"
           >
             Sign In
           </Link>

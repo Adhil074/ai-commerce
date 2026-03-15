@@ -53,11 +53,11 @@ export default function EditProductForm({ product }: { product: Product }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex text-black flex-col gap-4">
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="border p-2"
+        className="border p-2 "
         required
       />
 
@@ -94,7 +94,7 @@ export default function EditProductForm({ product }: { product: Product }) {
       <button
         type="submit"
         disabled={loading}
-        className="bg-black text-white p-2"
+        className="bg-[#e9dfd2] text-black px-4 py-2 rounded-md font-medium hover:bg-[#dfd4c6] transition disabled:opacity-50 self-center"
       >
         {loading ? "Saving..." : "Save Changes"}
       </button>

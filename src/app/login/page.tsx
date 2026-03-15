@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -48,14 +49,24 @@ export default function LoginPage() {
             required
           />
 
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full border border-black/30 rounded-lg px-4 py-3 bg-transparent text-black placeholder:text-gray-400 focus:outline-none focus:border-black"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="relative w-full">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full border border-black/30 rounded-lg px-4 py-3 pr-12 bg-transparent text-black placeholder:text-gray-400 focus:outline-none focus:border-black"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl"
+            >
+              {showPassword ? "🐵" : "🙈"}
+            </button>
+          </div>
 
           <button
             type="submit"

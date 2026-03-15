@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 import bcrypt from "bcrypt";
-import { computeReviewIntelligence } from "@/lib/review-intelligence";
+import { computeReviewIntelligence } from "../src/lib/review-intelligence";
 
 const connectionString = process.env.DATABASE_URL;
 

@@ -29,7 +29,7 @@ export default async function EditProductPage({ params }: PageProps) {
 
   return (
     <main className="max-w-xl mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-6">Edit Product</h1>
+      <h1 className="text-2xl font-bold mb-6 text-black">Edit Product</h1>
       <EditProductForm product={product} />
     </main>
   );

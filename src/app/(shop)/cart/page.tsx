@@ -121,8 +121,8 @@ export default function CartPage() {
 
   if (cart.length === 0) {
     return (
-      <main className="max-w-4xl mx-auto px-6 py-10">
-        <h1 className="text-2xl font-bold text-black">Your cart is empty</h1>
+      <main className="min-h-screen flex items-center justify-center px-6">
+        <h1 className="text-lg text-gray-600">Your cart is empty</h1>
       </main>
     );
   }
